@@ -42,17 +42,17 @@ const Devs = () => {
     }
   };
 
-  const handleEditUser = (userId) => {
+  const handleEditUser = (user) => {
     // Lógica para editar usuario, por ejemplo, redirigir a una página de edición
-    navigate(`/edit-user/${userId}`);
+    navigate(`/edit-user/${user.username}`);
   };
 
-  const handleDeleteUser = (userId) => {
+  const handleDeleteUser = (user) => {
     // Lógica para eliminar usuario, por ejemplo, mostrar un cuadro de diálogo de confirmación
     const confirmDelete = window.confirm("¿Estás seguro de que deseas eliminar este usuario?");
     if (confirmDelete) {
       // Lógica para eliminar el usuario, como hacer una solicitud DELETE al servidor
-      console.log(`Eliminar usuario con ID: ${userId}`);
+      console.log(`Eliminar usuario con ID: ${user.username}`);
 
       // Mostrar notificación de éxito al eliminar usuario
       toast.success("Usuario eliminado exitosamente.");
@@ -60,36 +60,37 @@ const Devs = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-semibold mb-4">Usuarios Registrados</h1>
-      <table className="min-w-full bg-white border border-gray-300">
-        <thead>
+    // bg-gradient-to-br from-blue-500 to-blue-700 min-h-screen flex  justify-center
+    <div className=" bg-slate-900 min-h-screen mx-auto flex flex-col mt-auto">
+      <h1 className=" text-5xl font-mono text-gray-100 mb-8 text-center mt-11">Usuarios Registrados</h1>
+      <table className=" m-12 bg-slate-500 border-slate-900 ">
+        <thead >
           <tr>
-            <th className="border border-gray-300 p-2">ID</th>
-            <th className="border border-gray-300 p-2">Nombre de Usuario</th>
-            <th className="border border-gray-300 p-2">Email</th>
-            <th className="border border-gray-300 p-2">Acciones</th>
+            <th className="border border-slate-900 p-2 text-gray-900">ID</th>
+            <th className="border border-slate-900 p-2 text-gray-900">Nombre de Usuario</th>
+            <th className="border border-slate-900 p-2 text-gray-900">Email</th>
+            <th className="border border-slate-900 p-2 text-gray-900">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {userData.map((user) => (
-            <tr key={user.id}>
-              <td className="border border-gray-300 p-2">{user.id}</td>
-              <td className="border border-gray-300 p-2">{user.username}</td>
-              <td className="border border-gray-300 p-2">{user.email}</td>
-              <td className="border border-gray-300 p-2">
+            <tr key={user.username}>
+              <td className="border border-slate-900 p-3 font-semibold">{user.id}</td>
+              <td className="border border-slate-700 p-3 font-semibold">{user.username}</td>
+              <td className="border border-slate-700 p-3 font-semibold">{user.email}</td>
+              <td className="border border-slate-700">
                 {/* Botones para editar y eliminar usuarios */}
                 <button
-                  className="bg-blue-500 text-white py-1 px-2 mr-2 rounded-md hover:bg-blue-600"
-                  onClick={() => handleEditUser(user.id)}
+                  className="font-semibold bg-blue-600  hover:bg-blue-900 text-white py-2 px-2 mr-1 pd-2 rounded-xl "
+                  onClick={() => handleEditUser(user.username)}
                 >
-                  <i className="fas fa-edit"></i> Editar
+                  <i className="fas fa-edit"> Editar</i> 
                 </button>
                 <button
-                  className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600"
-                  onClick={() => handleDeleteUser(user.id)}
+                  className="font-semibold bg-red-600  hover:bg-red-900 text-white py-2 px-2 rounded-xl"
+                  onClick={() => handleDeleteUser(user.username)}
                 >
-                  <i className="fas fa-trash"></i> Eliminar
+                  <i className="fas fa-trash"> Eliminar</i> 
                 </button>
               </td>
             </tr>
